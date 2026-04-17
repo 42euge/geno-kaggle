@@ -1,0 +1,6 @@
+role: kaggle-agent
+description: Kaggle benchmarking — create, run, monitor, and review benchmark tasks
+capabilities:
+  - kaggle
+  - benchmarks
+  - notebooks
