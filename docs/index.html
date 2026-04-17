@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>geno-kaggle</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0d1117;
+      color: #c9d1d9;
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Menlo', monospace;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 2rem;
+      color: #20BEFF;
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.5px;
+    }
+    .tagline {
+      color: #8b949e;
+      font-size: 0.95rem;
+      margin-bottom: 2.5rem;
+      border-left: 3px solid #20BEFF;
+      padding-left: 0.75rem;
+    }
+    h2 {
+      font-size: 1.1rem;
+      color: #20BEFF;
+      margin-bottom: 0.75rem;
+      margin-top: 2.5rem;
+    }
+    h2::before {
+      content: '# ';
+      opacity: 0.4;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+    }
+    th {
+      text-align: left;
+      color: #8b949e;
+      font-weight: 600;
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid #21262d;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.5px;
+    }
+    td {
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid #161b22;
+    }
+    td:first-child {
+      color: #20BEFF;
+      white-space: nowrap;
+    }
+    code, .cmd {
+      background: #161b22;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: #e6edf3;
+    }
+    pre {
+      background: #161b22;
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-size: 0.85rem;
+      border: 1px solid #21262d;
+      margin: 0.5rem 0;
+    }
+    pre .prompt { color: #20BEFF; }
+    pre .comment { color: #8b949e; }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    ul li {
+      padding: 0.3rem 0;
+    }
+    ul li::before {
+      content: '- ';
+      color: #20BEFF;
+    }
+    a {
+      color: #20BEFF;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .prereq-list li {
+      font-size: 0.9rem;
+    }
+    .ecosystem {
+      display: grid;
+      gap: 0.5rem;
+    }
+    .ecosystem a {
+      display: block;
+      background: #161b22;
+      padding: 0.6rem 0.9rem;
+      border-radius: 6px;
+      border: 1px solid #21262d;
+      transition: border-color 0.2s;
+      font-size: 0.9rem;
+    }
+    .ecosystem a:hover {
+      border-color: #20BEFF;
+      text-decoration: none;
+    }
+    .ecosystem .name { color: #20BEFF; }
+    .ecosystem .desc { color: #8b949e; font-size: 0.8rem; }
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #21262d;
+      color: #484f58;
+      font-size: 0.75rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>geno-kaggle</h1>
+    <p class="tagline">Kaggle benchmarking skills for Claude Code. Create, run, monitor, and review benchmark tasks on the Kaggle platform.</p>
+
+    <h2>Commands</h2>
+    <table>
+      <thead>
+        <tr><th>Command</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>/gt-create-benchmark-kaggle</td><td>Create a self-contained benchmark notebook for Kaggle</td></tr>
+        <tr><td>/gt-kaggle-benchmarks-task-generate</td><td>Scaffold a new benchmark task folder structure</td></tr>
+        <tr><td>/gt-kaggle-benchmarks-task-review</td><td>Pull and review results from a Kaggle benchmark run</td></tr>
+        <tr><td>/gt-run-kaggle-bench</td><td>Push, run, monitor, and debug a notebook on Kaggle</td></tr>
+        <tr><td>/gt-upload-kaggle</td><td>Upload a notebook to Kaggle</td></tr>
+        <tr><td>/gt-kaggle-discussion</td><td>Scrape competition discussions and generate insights</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Prerequisites</h2>
+    <ul class="prereq-list">
+      <li><a href="https://github.com/Kaggle/kaggle-api">Kaggle CLI</a> v2.0+ (<code>pip install kaggle</code>)</li>
+      <li>Kaggle API credentials at <code>~/.kaggle/kaggle.json</code></li>
+    </ul>
+
+    <h2>Install</h2>
+    <pre><span class="prompt">$</span> ./install.sh
+
+<span class="comment"># Or via the geno-tools ecosystem installer:</span>
+<span class="prompt">$</span> cd ../geno-tools && ./install.sh</pre>
+
+    <h2>Ecosystem</h2>
+    <div class="ecosystem">
+      <a href="https://github.com/42euge/geno-tools">
+        <span class="name">geno-tools</span>
+        <span class="desc"> &mdash; orchestrator + general tools</span>
+      </a>
+      <a href="https://github.com/42euge/geno-research">
+        <span class="name">geno-research</span>
+        <span class="desc"> &mdash; deep research workflows</span>
+      </a>
+      <a href="https://github.com/42euge/geno-media">
+        <span class="name">geno-media</span>
+        <span class="desc"> &mdash; media creation (audiobooks, video)</span>
+      </a>
+      <a href="https://github.com/42euge/geno-kaggle">
+        <span class="name">geno-kaggle</span>
+        <span class="desc"> &mdash; Kaggle benchmarking skills</span>
+      </a>
+    </div>
+
+    <footer>MIT &middot; <a href="https://github.com/42euge/geno-kaggle">github.com/42euge/geno-kaggle</a></footer>
+  </div>
+</body>
+</html>
