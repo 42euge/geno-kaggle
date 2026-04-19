@@ -8,7 +8,7 @@ Validate, push, run, monitor, and debug a Jupyter notebook on the Kaggle Benchma
 
 Examples:
 - `notebooks/kaggle_benchmark.ipynb` — push and run, auto-detect or ask for task slug
-- `notebooks/kaggle_benchmark.ipynb eugenio0/new-benchmark-task-0def0` — push to specific task
+- `notebooks/kaggle_benchmark.ipynb <your-kaggle-username>/new-benchmark-task-0def0` — push to specific task
 - (empty) — search for `.ipynb` files and present options
 
 ## Kaggle CLI Setup
@@ -228,7 +228,7 @@ The message body should capture:
 
 Example:
 ```bash
-geno-notes note "Kaggle Benchmark v4 — COMPLETE. Task eugenio0/new-benchmark-task-0def0. Models: gemini-2.5-flash, gemini-2.5-pro, claude-sonnet-4. SIN: adversarial 10:1, related 25:1, unrelated 25:1. Vigilance: 99-100%. Output → /tmp/kaggle-output/" --kind milestone
+geno-notes note "Kaggle Benchmark v4 — COMPLETE. Task <your-kaggle-username>/new-benchmark-task-0def0. Models: gemini-2.5-flash, gemini-2.5-pro, claude-sonnet-4. SIN: adversarial 10:1, related 25:1, unrelated 25:1. Vigilance: 99-100%. Output → /tmp/kaggle-output/" --kind milestone
 ```
 
 For multi-line context or code blocks, quote-escape carefully or use a heredoc:
@@ -236,7 +236,7 @@ For multi-line context or code blocks, quote-escape carefully or use a heredoc:
 ```bash
 geno-notes note "$(cat <<'EOF'
 Kaggle Benchmark v4 — COMPLETE
-Task: eugenio0/new-benchmark-task-0def0
+Task: <your-kaggle-username>/new-benchmark-task-0def0
 Models: gemini-2.5-flash, gemini-2.5-pro
 SIN Results: adversarial 10:1, related 25:1, unrelated 25:1
 Output → /tmp/kaggle-output/
