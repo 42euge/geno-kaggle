@@ -1,3 +1,8 @@
+---
+name: geno-upload-kaggle
+description: "Upload Notebook to Kaggle"
+---
+
 # Upload Notebook to Kaggle
 
 Prepare and upload a Jupyter notebook to Kaggle for running with the kaggle-benchmarks SDK.

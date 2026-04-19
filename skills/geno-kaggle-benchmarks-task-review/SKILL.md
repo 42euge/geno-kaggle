@@ -1,3 +1,8 @@
+---
+name: geno-kaggle-benchmarks-task-review
+description: "Review Kaggle Benchmark Task Results"
+---
+
 # Review Kaggle Benchmark Task Results
 
 Pull the latest run from Kaggle for a benchmark task, verify it matches the last pushed version, analyze the results, and write a review.

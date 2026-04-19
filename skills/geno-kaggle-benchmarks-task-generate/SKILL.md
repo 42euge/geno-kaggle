@@ -1,3 +1,8 @@
+---
+name: geno-kaggle-benchmarks-task-generate
+description: "Generate Kaggle Benchmark Task Structure"
+---
+
 # Generate Kaggle Benchmark Task Structure
 
 Scaffold a new benchmark task with the standard folder structure and notebook template.
