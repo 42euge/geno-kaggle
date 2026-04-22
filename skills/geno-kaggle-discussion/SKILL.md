@@ -1,3 +1,8 @@
+---
+name: geno-kaggle-discussion
+description: "Kaggle Discussion Scraper"
+---
+
 # Kaggle Discussion Scraper
 
 Scrape all discussion threads from the kaggle-measuring-agi competition, save each thread as a YAML file with its comments, and generate per-track insight summaries.
