@@ -13,7 +13,7 @@ Validate, push, run, monitor, and debug a Jupyter notebook on the Kaggle Benchma
 
 Examples:
 - `notebooks/kaggle_benchmark.ipynb` — push and run, auto-detect or ask for task slug
-- `notebooks/kaggle_benchmark.ipynb eugenio0/new-benchmark-task-0def0` — push to specific task
+- `notebooks/kaggle_benchmark.ipynb <your-kaggle-username>/new-benchmark-task-0def0` — push to specific task
 - (empty) — search for `.ipynb` files and present options
 
 ## Kaggle CLI Setup
@@ -214,27 +214,39 @@ The `parse_numbered_answers` function must handle these model behaviors:
 
 If there is an error, fix the notebook locally, re-push (repeat step 4), and monitor again. Continue this loop until the notebook completes successfully.
 
-### 7. Log results to lab notes
+### 7. Log results to the journal
 
-After a successful run (or informative failure), log the results to `geno-tools/labnotes/notes.md`:
+After a successful run (or informative failure), log the results via `geno-notes`:
 
-- **Timestamp** the entry
-- **Record**: task slug, version number, status (complete/error), runtime
-- **If complete**: paste key metrics (accuracy tables, attention thresholds, model comparison)
-- **If error**: note the error type and what was fixed
-- **Available models**: record what `kbench.llms.keys()` returned (from stdout log)
-- **Generated data**: note any output files retrieved and where they were saved locally
+```bash
+geno-notes note "<summary>" --kind milestone --task <task-id-if-linked>
+```
 
-Example entry:
-```markdown
-### 2026-03-22 — Kaggle Benchmark Run v4
+Use `--kind milestone` for a completed run, `--kind bug` for an error worth remembering. The entry lands in the active scope's `journal/YYYY/YYYY-MM.{md,jsonl}` with seconds-precision timestamp. Scope auto-resolves (project if `./geno/geno-notes/` exists, else global).
 
-- **Task**: `eugenio0/new-benchmark-task-0def0` (v4)
-- **Status**: COMPLETE
-- **Models**: gemini-2.5-flash, gemini-2.5-pro, claude-sonnet-4
-- **SIN Results**: adversarial threshold=10:1, related=25:1, unrelated=25:1
-- **Vigilance**: 99-100% across all types
-- **Output files**: results saved to `/tmp/kaggle-output/`
+The message body should capture:
+- Task slug, version number, status (complete/error), runtime
+- If complete: key metrics (accuracy tables, attention thresholds, model comparison)
+- If error: error type and what was fixed
+- Available models (what `kbench.llms.keys()` returned)
+- Paths to any retrieved output files
+
+Example:
+```bash
+geno-notes note "Kaggle Benchmark v4 — COMPLETE. Task <your-kaggle-username>/new-benchmark-task-0def0. Models: gemini-2.5-flash, gemini-2.5-pro, claude-sonnet-4. SIN: adversarial 10:1, related 25:1, unrelated 25:1. Vigilance: 99-100%. Output → /tmp/kaggle-output/" --kind milestone
+```
+
+For multi-line context or code blocks, quote-escape carefully or use a heredoc:
+
+```bash
+geno-notes note "$(cat <<'EOF'
+Kaggle Benchmark v4 — COMPLETE
+Task: <your-kaggle-username>/new-benchmark-task-0def0
+Models: gemini-2.5-flash, gemini-2.5-pro
+SIN Results: adversarial 10:1, related 25:1, unrelated 25:1
+Output → /tmp/kaggle-output/
+EOF
+)" --kind milestone
 ```
 
 ### 8. Multi-model evaluation
