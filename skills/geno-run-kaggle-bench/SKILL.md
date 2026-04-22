@@ -1,3 +1,8 @@
+---
+name: geno-run-kaggle-bench
+description: "Run Kaggle Benchmark"
+---
+
 # Run Kaggle Benchmark
 
 Validate, push, run, monitor, and debug a Jupyter notebook on the Kaggle Benchmarks platform. Retrieves results and logs progress to lab notes.

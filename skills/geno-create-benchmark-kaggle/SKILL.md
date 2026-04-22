@@ -1,3 +1,8 @@
+---
+name: geno-create-benchmark-kaggle
+description: "Create Kaggle Benchmark Notebook"
+---
+
 # Create Kaggle Benchmark Notebook
 
 Generate a self-contained Jupyter notebook (.ipynb) for a Kaggle Benchmark task that can be uploaded and run against multiple models via the Kaggle UI.
