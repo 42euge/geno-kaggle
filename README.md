@@ -1,32 +1,34 @@
 # geno-kaggle
 
-Kaggle benchmarking skills for [Claude Code](https://docs.anthropic.com/en/docs/claude-code). Create, run, monitor, and review benchmark tasks on the Kaggle platform.
+Kaggle benchmarking skills for AI coding agents. Create, run, monitor, and review benchmark tasks on the Kaggle platform.
 
-## Commands
+## Skills
 
-| Command | Description |
-|---------|-------------|
-| `/gt-create-benchmark-kaggle <desc>` | Create a self-contained benchmark notebook for Kaggle |
-| `/gt-kaggle-benchmarks-task-generate <name>` | Scaffold a new benchmark task folder structure |
-| `/gt-kaggle-benchmarks-task-review <task>` | Pull and review results from a Kaggle benchmark run |
-| `/gt-run-kaggle-bench <notebook>` | Push, run, monitor, and debug a notebook on Kaggle |
-| `/gt-upload-kaggle <notebook>` | Upload a notebook to Kaggle |
-| `/gt-kaggle-discussion` | Scrape competition discussions and generate insights |
+| Skill | Description |
+|-------|-------------|
+| `/geno-create-benchmark-kaggle <desc>` | Create a self-contained benchmark notebook for Kaggle |
+| `/geno-kaggle-benchmarks-task-generate <name>` | Scaffold a new benchmark task folder structure |
+| `/geno-kaggle-benchmarks-task-review <task>` | Pull and review results from a Kaggle benchmark run |
+| `/geno-run-kaggle-bench <notebook>` | Push, run, monitor, and debug a notebook on Kaggle |
+| `/geno-upload-kaggle <notebook>` | Upload a notebook to Kaggle |
+| `/geno-kaggle-discussion` | Scrape competition discussions and generate insights |
 
 ## Prerequisites
 
 - [Kaggle CLI](https://github.com/Kaggle/kaggle-api) v2.0+ (`pip install kaggle`)
 - Kaggle API credentials at `~/.kaggle/kaggle.json`
+- A supported coding CLI (Claude Code, Gemini CLI, Codex, or OpenCode)
 
 ## Install
 
 ```bash
-./install.sh
+geno-tools install geno-kaggle
 ```
 
-Or install via geno-tools ecosystem installer:
-```bash
-cd ../geno-tools && ./install.sh
+Or from within an agent session:
+
+```
+/geno-tools install geno-kaggle
 ```
 
 ## Part of the geno ecosystem

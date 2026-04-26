@@ -188,7 +188,7 @@ Notebook created: <path>
 Next steps:
 1. Review the notebook locally (open in Jupyter/VS Code)
 2. Upload to Kaggle as a benchmark task:
-   /gt-run-kaggle-bench <path>
+   /geno-run-kaggle-bench <path>
 
    Or manually:
    - Go to https://www.kaggle.com/benchmarks/tasks/new
@@ -197,7 +197,7 @@ Next steps:
    - Click "Save Task" to publish
 
 3. Add models via the "Add Models" button in the Kaggle UI
-4. Monitor results with: /gt-run-kaggle-bench <path> <slug>
+4. Monitor results with: /geno-run-kaggle-bench <path> <slug>
 ```
 
 ## Important Notes
