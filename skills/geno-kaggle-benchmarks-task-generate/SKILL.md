@@ -52,7 +52,7 @@ Create `tasks/<task_name>/<task_name>.ipynb` with this cell structure:
 11. **Code: Analysis** — summary statistics and metrics
 12. **Code: Plot** — matplotlib visualization
 
-Key requirements (from CLAUDE.md):
+Key requirements:
 - Self-contained: all data generated inline with fixed seed
 - `llm` must be passed as a list: `llm=[kbench.llm]`
 - Include `strip_thinking()` for reasoning model compatibility

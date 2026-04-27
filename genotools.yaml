@@ -1,0 +1,5 @@
+name: geno-kaggle
+version: "0.1.0"
+description: >-
+  Kaggle benchmarking toolkit — create, run, monitor, and review benchmark
+  notebooks on the Kaggle platform. Scrape competition discussions for insights.
