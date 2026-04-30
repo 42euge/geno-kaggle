@@ -18,7 +18,7 @@ If no arguments provided, search for `.ipynb` files in the current project and a
 ### 1. Resolve the notebook
 
 - If `$ARGUMENTS` is provided, resolve it to an absolute path
-- If not provided, glob for `**/*.ipynb` (excluding `.venv/`, `node_modules/`, `.ipynb_checkpoints/`) and present the list using `AskUserQuestion`
+- If not provided, glob for `**/*.ipynb` (excluding `.venv/`, `node_modules/`, `.ipynb_checkpoints/`) and prompt the user to select one
 - Verify the file exists and is valid JSON (valid notebook format)
 
 ### 2. Ensure the repo is public
