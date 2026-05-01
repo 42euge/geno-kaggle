@@ -37,7 +37,7 @@ These are hard constraints for the generated notebook:
 
 ### 1. Gather benchmark specification
 
-If `$ARGUMENTS` is empty or incomplete, use `AskUserQuestion` to collect:
+If `$ARGUMENTS` is empty or incomplete, prompt the user to provide:
 - **Track**: Which of the 5 tracks?
 - **Cognitive ability**: What specific ability within the track to test?
 - **Task design**: How will the task work? What does the model need to do?

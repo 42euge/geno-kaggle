@@ -18,7 +18,7 @@ If no arguments provided, list available tasks in `tasks/` and ask the user whic
 ### 1. Resolve the task
 
 - If `$ARGUMENTS` is provided, verify `tasks/<task_name>/` exists and contains a `.ipynb` file
-- If not provided, list directories under `tasks/` and present the list using `AskUserQuestion`
+- If not provided, list directories under `tasks/` and ask the user which one to review
 
 ### 2. Pull the latest run from Kaggle
 

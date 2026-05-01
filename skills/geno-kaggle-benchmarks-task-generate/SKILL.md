@@ -16,7 +16,7 @@ Scaffold a new benchmark task with the standard folder structure and notebook te
 ### 1. Resolve task name
 
 - If `$ARGUMENTS` is provided, use it as the task name
-- If not provided, use `AskUserQuestion` to get the task name and a one-line description
+- If not provided, ask the user for the task name and a one-line description
 - Validate: must be snake_case, no spaces, no hyphens
 
 ### 2. Create folder structure

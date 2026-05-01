@@ -29,7 +29,6 @@ geno-kaggle/
 │   ├── geno-kaggle-discussion/
 │   ├── geno-run-kaggle-bench/
 │   └── geno-upload-kaggle/
-├── commands/            # legacy command files (gt-*.md)
 ├── config/              # default config templates
 │   └── defaults/
 │       └── colab.json
@@ -45,6 +44,15 @@ geno-kaggle/
 - **Skill naming**: follows the geno ecosystem `{skillset}-{sub-skillset}-{skill}` convention
 - **Install method**: `geno-tools install geno-kaggle` (canonical), never `./install.sh` or `npx skills add`
 - **Agent-neutral language**: descriptions use "coding agent" / "agent session", not a specific agent name
+- **Prefix aliasing**: slash commands use the canonical `geno-` prefix in source (e.g., `/geno-upload-kaggle`). Short `/gt-` aliases are configured per-install by `geno-tools` and should not appear in skill definitions or documentation.
+
+## Adding a new skill
+
+1. Create `skills/<skill-name>/SKILL.md` with YAML front matter (`name`, `description`) and a `## Workflow` section.
+2. Follow the naming convention: `geno-kaggle-<sub-skillset>-<skill>` (e.g., `geno-kaggle-benchmarks-task-generate`).
+3. Add the skill to the table in GENO.md and to the umbrella SKILL.md.
+4. Register the skill in `genotools.yaml` under the `skills` list.
+5. Use agent-neutral language -- write "ask the user" or "prompt the user", never reference a specific tool name like `AskUserQuestion`.
 
 ## Dependencies and runtime
 
