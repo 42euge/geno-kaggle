@@ -1,6 +1,19 @@
 ---
 name: geno-kaggle-benchmarks-task-review
 description: "Review Kaggle Benchmark Task Results"
+observability:
+  success_signal: "Review markdown written to tasks/<task_name>/review/review_<date>.md and summary printed"
+  failure_signals:
+    - "Kaggle kernel pull fails (slug not found, auth error)"
+    - "Version mismatch between local and Kaggle notebook timestamps"
+    - "Pulled notebook has no cell outputs (run did not complete)"
+  knowledge_reads:
+    - "~/.kaggle/kaggle.json (API credentials)"
+    - "tasks/<task_name>/*.ipynb (local notebook for version comparison)"
+    - "Pulled notebook cell outputs from Kaggle"
+  knowledge_writes:
+    - "tasks/<task_name>/results/latest_run.md (raw extracted outputs)"
+    - "tasks/<task_name>/review/review_<date>.md (analysis and recommendations)"
 ---
 
 # Review Kaggle Benchmark Task Results
@@ -79,3 +92,19 @@ Write a review markdown file to `tasks/<task_name>/review/review_<date>.md` with
 ### 6. Report to user
 
 Print a summary of the review findings directly in the conversation, and tell the user where the review file was saved.
+
+## Completion
+
+When this skill finishes, emit a trace:
+
+```bash
+geno-trace emit \
+  --skill geno-kaggle-benchmarks-task-review \
+  --status <success|failure|abandoned> \
+  --tool-calls <approximate count> \
+  --errors <count of tool/command errors>
+```
+
+- `success` = review markdown written to tasks/<task_name>/review/ and summary printed
+- `failure` = kernel pull failed, notebook had no outputs, or review generation failed
+- `abandoned` = user stopped early

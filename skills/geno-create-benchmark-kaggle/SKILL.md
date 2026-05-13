@@ -1,6 +1,17 @@
 ---
 name: geno-create-benchmark-kaggle
 description: "Create Kaggle Benchmark Notebook"
+observability:
+  success_signal: "Valid .ipynb notebook created, passes all 10 validation checks, and next-step instructions printed"
+  failure_signals:
+    - "Generated notebook fails JSON validation or nbformat checks"
+    - "Missing required elements (no @kbench.task, no kbench.llm usage, no llm parameter)"
+    - "Output path not writable or parent directory does not exist"
+  knowledge_reads:
+    - "User-provided benchmark specification (track, cognitive ability, task design)"
+    - "Kaggle Benchmark environment constraints"
+  knowledge_writes:
+    - "Generated .ipynb notebook file at specified output path"
 ---
 
 # Create Kaggle Benchmark Notebook
@@ -210,3 +221,19 @@ Next steps:
 - Generate unique cell IDs (use short hex strings like `"a1b2c3"`)
 - Target 50-200 evaluation items for good discriminatory power without excessive runtime
 - Include difficulty scaling so the benchmark isn't trivially easy or impossible
+
+## Completion
+
+When this skill finishes, emit a trace:
+
+```bash
+geno-trace emit \
+  --skill geno-create-benchmark-kaggle \
+  --status <success|failure|abandoned> \
+  --tool-calls <approximate count> \
+  --errors <count of tool/command errors>
+```
+
+- `success` = valid .ipynb notebook created and all 10 validation checks pass
+- `failure` = notebook generation failed, or validation checks could not be resolved
+- `abandoned` = user stopped early

@@ -1,6 +1,21 @@
 ---
 name: geno-run-kaggle-bench
 description: "Run Kaggle Benchmark"
+observability:
+  success_signal: "Notebook pushed, executed on Kaggle, results retrieved to /tmp/kaggle-output/ and saved to results/"
+  failure_signals:
+    - "Compatibility checks fail (missing SDK import, git clone in notebook, etc.)"
+    - "kaggle kernels push fails (slug not found, auth error, never saved in UI)"
+    - "Notebook execution errors on Kaggle (PapermillExecutionError, protobuf conflict)"
+  knowledge_reads:
+    - "~/.kaggle/kaggle.json (API credentials)"
+    - "Target .ipynb notebook file"
+    - "Git remote URL and repo visibility"
+    - "Kaggle kernel status and output logs"
+  knowledge_writes:
+    - "results/<run_label>/ (raw logs, .run.json, plots)"
+    - "geno-notes journal entry (milestone or bug)"
+    - "Git commits (if uncommitted changes are staged and pushed)"
 ---
 
 # Run Kaggle Benchmark
@@ -325,3 +340,19 @@ The `.run.json` files contain full conversations (prompts + responses), token co
 - **Do NOT install the SDK** in the notebook (`pip install kaggle-benchmarks`). It is pre-installed on benchmark notebooks and installing separately causes protobuf version conflicts.
 - **No `git` in runtime** — use `urllib.request.urlretrieve` for file downloads from GitHub raw URLs.
 - Available models can be listed with `kbench.llms.keys()` but the primary evaluation should use `kbench.llm`.
+
+## Completion
+
+When this skill finishes, emit a trace:
+
+```bash
+geno-trace emit \
+  --skill geno-run-kaggle-bench \
+  --status <success|failure|abandoned> \
+  --tool-calls <approximate count> \
+  --errors <count of tool/command errors>
+```
+
+- `success` = notebook pushed, executed on Kaggle without errors, results retrieved and saved to results/
+- `failure` = compatibility checks failed, push rejected, or Kaggle execution errored after all fix attempts
+- `abandoned` = user stopped early
