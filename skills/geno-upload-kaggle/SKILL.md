@@ -1,6 +1,19 @@
 ---
 name: geno-upload-kaggle
 description: "Upload Notebook to Kaggle"
+observability:
+  success_signal: "Notebook uploaded to Kaggle via API push or manual instructions provided with valid GitHub URL"
+  failure_signals:
+    - "Notebook file not found or invalid JSON"
+    - "kaggle kernels push fails (auth error, metadata error)"
+    - "Repo cannot be made public and notebook references it"
+  knowledge_reads:
+    - "~/.kaggle/kaggle.json (API credentials)"
+    - "Target .ipynb notebook file"
+    - "Git remote URL and repo visibility"
+  knowledge_writes:
+    - "kernel-metadata.json (Kaggle kernel metadata for API push)"
+    - "Git commits (if uncommitted notebook changes are staged)"
 ---
 
 # Upload Notebook to Kaggle
@@ -79,3 +92,19 @@ If the user has the Kaggle API configured (`~/.kaggle/kaggle.json` exists):
   ```
 - Run `kaggle kernels push -p <notebook-directory>`
 - Report the kernel URL on success
+
+## Completion
+
+When this skill finishes, emit a trace:
+
+```bash
+geno-trace emit \
+  --skill geno-upload-kaggle \
+  --status <success|failure|abandoned> \
+  --tool-calls <approximate count> \
+  --errors <count of tool/command errors>
+```
+
+- `success` = notebook uploaded via API push or manual upload instructions provided with valid URLs
+- `failure` = notebook not found, invalid format, or kaggle kernels push failed
+- `abandoned` = user stopped early

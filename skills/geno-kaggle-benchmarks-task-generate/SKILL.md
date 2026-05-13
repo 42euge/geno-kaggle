@@ -1,6 +1,20 @@
 ---
 name: geno-kaggle-benchmarks-task-generate
 description: "Generate Kaggle Benchmark Task Structure"
+observability:
+  success_signal: "tasks/<task_name>/ directory created with .ipynb notebook, docs/, results/, and review/ subdirectories"
+  failure_signals:
+    - "Task name validation fails (not snake_case)"
+    - "tasks/ directory does not exist or is not writable"
+    - "Generated notebook is invalid JSON or missing required cells"
+  knowledge_reads:
+    - "User-provided task name and description"
+    - "CLAUDE.md for notebook conventions"
+  knowledge_writes:
+    - "tasks/<task_name>/<task_name>.ipynb (benchmark notebook template)"
+    - "tasks/<task_name>/docs/<task_name>.md (task documentation)"
+    - "tasks/<task_name>/results/.gitkeep"
+    - "tasks/<task_name>/review/.gitkeep"
 ---
 
 # Generate Kaggle Benchmark Task Structure
@@ -71,3 +85,19 @@ Create `tasks/<task_name>/docs/<task_name>.md` with sections:
 Tell the user:
 - What was created
 - Next steps: fill in the data generation and task function, then push to GitHub and link from Kaggle
+
+## Completion
+
+When this skill finishes, emit a trace:
+
+```bash
+geno-trace emit \
+  --skill geno-kaggle-benchmarks-task-generate \
+  --status <success|failure|abandoned> \
+  --tool-calls <approximate count> \
+  --errors <count of tool/command errors>
+```
+
+- `success` = tasks/<task_name>/ directory created with notebook, docs, results, and review subdirectories
+- `failure` = task name invalid, directory creation failed, or notebook template generation failed
+- `abandoned` = user stopped early

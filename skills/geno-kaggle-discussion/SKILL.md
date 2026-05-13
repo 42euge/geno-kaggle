@@ -1,6 +1,19 @@
 ---
 name: geno-kaggle-discussion
 description: "Kaggle Discussion Scraper"
+observability:
+  success_signal: "index.yaml and per-track insight markdown files generated under competition-info/kaggle-discussions/"
+  failure_signals:
+    - "Kaggle Search API returns auth error or empty results"
+    - "WebFetch fails on discussion thread URLs (rate-limited or 404)"
+    - "YAML serialization error when saving thread files"
+  knowledge_reads:
+    - "~/.kaggle/kaggle.json (API credentials)"
+    - "Existing thread YAML files for incremental update comparison"
+  knowledge_writes:
+    - "competition-info/kaggle-discussions/threads/*.yaml (per-thread data)"
+    - "competition-info/kaggle-discussions/index.yaml (master index)"
+    - "competition-info/kaggle-discussions/insights/*.md (per-track insight summaries)"
 ---
 
 # Kaggle Discussion Scraper
@@ -286,3 +299,19 @@ Print a summary:
 - **YAML formatting**: Use block scalars (`|`) for markdown content to preserve formatting
 - **Track classification**: Use the thread's title + post markdown + comment content for classification. Weight the title most heavily.
 - **Parallel fetching**: Use up to 3 parallel Agents for WebFetch calls to speed up scraping, but respect rate limits.
+
+## Completion
+
+When this skill finishes, emit a trace:
+
+```bash
+geno-trace emit \
+  --skill geno-kaggle-discussion \
+  --status <success|failure|abandoned> \
+  --tool-calls <approximate count> \
+  --errors <count of tool/command errors>
+```
+
+- `success` = index.yaml written and at least one insight markdown generated
+- `failure` = API scrape returned no threads, or YAML/insight generation failed
+- `abandoned` = user stopped early
