@@ -1,5 +1,7 @@
 # geno-kaggle
 
+[![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://42euge.github.io/geno-kaggle/)
+
 Kaggle benchmarking skills for AI coding agents. Create, run, monitor, and review benchmark tasks on the Kaggle platform.
 
 ## Skills
